@@ -1,4 +1,6 @@
 BCA::Application.routes.draw do
+  resources :sessions
+
   resources :replies
 
   resources :posts
