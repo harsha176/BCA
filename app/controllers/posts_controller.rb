@@ -21,9 +21,11 @@ class PostsController < ApplicationController
     end
   end
 
+
   # GET /posts/new
   # GET /posts/new.json
   def new
+    authorize
     @post = Post.new
 
     respond_to do |format|
@@ -34,12 +36,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    authorize
     @post = Post.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.json
   def create
+    authorize
     @post = Post.new(params[:post])
 
     respond_to do |format|
@@ -56,6 +60,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
+    authorize
     @post = Post.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +77,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    authorize
     @post = Post.find(params[:id])
     @post.destroy
 

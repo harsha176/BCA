@@ -15,13 +15,16 @@
     <td><%= post.title %></td>
     <td><%= post.message %></td>
     <td><%= post.user_id %></td>
-    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Reply', new_reply_path %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
+<p>
+  <%= link_to "Logout", :log_out%>
+</p>
 <br />
 
 <%= link_to 'New Post', new_post_path %>

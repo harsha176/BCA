@@ -1,4 +1,9 @@
 BCA::Application.routes.draw do
+
+  get "log_in" => "sessions#new", :as => "log_in"
+
+  get "log_out" => "sessions#destroy", :as=>"log_out"
+
   resources :sessions
 
   resources :replies
@@ -7,6 +12,7 @@ BCA::Application.routes.draw do
 
   resources :users
 
+  root :to=> "users#new"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

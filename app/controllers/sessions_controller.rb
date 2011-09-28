@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+ skip_before_filter :authorize
   # GET /sessions
   # GET /sessions.json
   def index
@@ -26,10 +27,11 @@ class SessionsController < ApplicationController
   def new
     @session = Session.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @session }
-    end
+    render 'sessions/login'
+    #respond_to do |format|
+     # format.html # new.html.erb
+      #format.json { render json: @session }
+   # end
   end
 
   # GET /sessions/1/edit
@@ -39,17 +41,14 @@ class SessionsController < ApplicationController
 
   # POST /sessions
   # POST /sessions.json
-  def create
-    @session = Session.new(params[:session])
-
-    respond_to do |format|
-      if @session.save
-        format.html { redirect_to @session, notice: 'Session was successfully created.' }
-        format.json { render json: @session, status: :created, location: @session }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @session.errors, status: :unprocessable_entity }
-      end
+    def create
+    user = User.authenticate(params[:username], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect_to posts_url, :notice => "Logged in!"
+    else
+      flash.now.alert = "Invalid email or password"
+      render 'sessions/login'
     end
   end
 
@@ -72,12 +71,7 @@ class SessionsController < ApplicationController
   # DELETE /sessions/1
   # DELETE /sessions/1.json
   def destroy
-    @session = Session.find(params[:id])
-    @session.destroy
-
-    respond_to do |format|
-      format.html { redirect_to sessions_url }
-      format.json { head :ok }
-    end
+    session[:user_id] = nil
+    redirect_to :log_in, :notice => "Logged out"
   end
 end

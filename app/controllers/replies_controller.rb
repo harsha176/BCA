@@ -24,6 +24,7 @@ class RepliesController < ApplicationController
   # GET /replies/new
   # GET /replies/new.json
   def new
+    @post = params[:post]
     @reply = Reply.new
 
     respond_to do |format|

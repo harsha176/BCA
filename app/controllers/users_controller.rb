@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+  skip_before_filter :authorize, :only => [:new, :create]
+
   def index
     @users = User.all
 
@@ -40,6 +42,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+
     @user = User.new(params[:user])
 
     respond_to do |format|

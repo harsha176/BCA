@@ -1,5 +1,14 @@
-<h1>New user</h1>
+<h1>Register</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', users_path %>
+<div style="float:left;">
+  <%= button_to "Login", new_session_path, :method => :get %>
+</div>
+<div></div>
+<div>
+  <%= form_tag posts_path do %>
+      <%= search_field_tag :search, params[:search] %>
+      <%= select_tag :option, "<option>post</option><option>user</option>".html_safe %>
+      <p class="button"><%= submit_tag "Search", :action=>"show" %></p>
+  <% end %>
+</div>
