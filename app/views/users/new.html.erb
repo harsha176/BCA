@@ -1,14 +1,33 @@
-<h1>Register</h1>
+<table width="1000" border="0">
+  <tr>
+<td colspan="2" style="background-color:#458B74;">
+<h2 align="center">Back Channel Application</h2>
+</td>
+</tr>
+<tr valign="top">
+  <td style="background-color:#FFF8DC;width:300px;text-align:top;">
+<h2 align="center">Register</h2>
 
 <%= render 'form' %>
 <div style="float:left;">
   <%= button_to "Login", new_session_path, :method => :get %>
 </div>
-<div></div>
-<div>
+  </td>
+
+<td style="background-color:#eeeeee;height:200px;width:400px;text-align:top;">
+  <div>
+
+
+  <div align = center>
+    <h2 align="center">Search</h2>
   <%= form_tag posts_path do %>
       <%= search_field_tag :search, params[:search] %>
       <%= select_tag :option, "<option>post</option><option>user</option>".html_safe %>
       <p class="button"><%= submit_tag "Search", :action=>"show" %></p>
   <% end %>
-</div>
+    </div>
+    </div>
+</td>
+</tr>
+  </table>
+
