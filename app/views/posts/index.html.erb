@@ -1,24 +1,31 @@
-<h2>Listing posts</h2>
+<%= stylesheet_link_tag 'posts', :media => 'screen' %>
+<h2 align="center">Listing posts</h2>
 
 <table>
   <tr>
-    <th>Title</th>
-    <th>Message</th>
-    <th>User</th>
+      <th colspan="1">Title</th>
+    <th colspan="1">Message</th>
+    <th colspan="1">User</th>
     <th></th>
     <th></th>
     <th></th>
-  </tr>
 
+
+      </td>
+</tr>
 <% @posts.each do |post| %>
-  <tr>
-    <td><%= post.title %></td>
+
+      <tr>
+          <td ><%= post.title %></td>
     <td><%= post.message %></td>
-    <td><%= post.user_id %></td>
+       <td><%= post.user_id %></td>
     <td><%= link_to 'Reply', new_reply_path %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+
+      </tr>
+   <td colspan="2" style="background-color:#98F5FF;">
+     </td>
 <% end %>
 </table>
 
