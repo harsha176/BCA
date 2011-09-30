@@ -1,0 +1,14 @@
+body {
+  background: #FEFFEF;
+}
+label{
+                   color: #458B74;
+}
+input[type="submit"] {
+   font-family:Arial,sans-serif;
+   font-weight:bold;
+   color:#990000;
+   background-color:#FFFFCC;
+   border-style:outset;
+   border-color:#990000;
+}
