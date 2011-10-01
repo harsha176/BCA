@@ -3,6 +3,11 @@ class RepliesController < ApplicationController
   # GET /replies.json
   def index
     @replies = Reply.all
+    @votes = Hash.new
+
+    for reply in @replies
+      @votes[reply.id] = RepliesUsers.get_vote_count(reply.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,11 +29,12 @@ class RepliesController < ApplicationController
   # GET /replies/new
   # GET /replies/new.json
   def new
-    @post = params[:post]
     @reply = Reply.new
+    @reply.post_id = params[:post_id]
+    @replies = Reply.find_all_by_post_id(@reply.post_id)
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html  # new.html.erb
       format.json { render json: @reply }
     end
   end
@@ -42,6 +48,7 @@ class RepliesController < ApplicationController
   # POST /replies.json
   def create
     @reply = Reply.new(params[:reply])
+    @reply.user_id = current_user.id
 
     respond_to do |format|
       if @reply.save
@@ -80,5 +87,15 @@ class RepliesController < ApplicationController
       format.html { redirect_to replies_url }
       format.json { head :ok }
     end
+  end
+
+  def update_votes
+    @user = current_user
+    @reply_id = params[:reply_id]
+
+    msg = RepliesUsers.vote(@user.id, @reply_id)
+
+    redirect_to :action => "index"
+
   end
 end

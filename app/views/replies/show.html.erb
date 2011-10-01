@@ -7,12 +7,12 @@
 
 <p>
   <b>User:</b>
-  <%= @reply.user_id %>
+  <%= User.find(@reply.user_id).username %>
 </p>
 
 <p>
   <b>Post:</b>
-  <%= @reply.post_id %>
+  <%= Post.find(@reply.post_id).title %>
 </p>
 
 

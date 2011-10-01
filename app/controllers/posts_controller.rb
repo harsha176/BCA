@@ -3,6 +3,11 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @votes = Hash.new
+    ## create a votes variable and initialize it with vote count and display them index page
+    for post in @posts
+      @votes[post.id] = PostsUsers.get_vote_count(post.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +49,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     authorize
+    @user = current_user
     @post = Post.new(params[:post])
+    @post.user_id = @user.id
 
     respond_to do |format|
       if @post.save
@@ -85,5 +92,15 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :ok }
     end
+  end
+
+  def update_votes
+    @user = current_user
+    @post_id = params[:post_id]
+
+    msg = PostsUsers.vote(@user.id, @post_id)
+
+    redirect_to :action => "index"
+
   end
 end

@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
     before_filter :authorize
     private
     def current_user
-      user.find(session[:user_id])
+      User.find(session[:user_id])
     rescue ActiveRecord::RecordNotFound
-      user = user.create
+      user = User.create
       session[:user_id] = user.id
       user
     end

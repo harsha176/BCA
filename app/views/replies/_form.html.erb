@@ -10,6 +10,12 @@
       </ul>
     </div>
   <% end %>
+    <div class="field">
+    <%= f.label :Post %><br />
+      <%= f.hidden_field :post_id, :value=> @reply.post_id%>
+      <%= f.label Post.find(@reply.post_id).title%>
+      <%= f.label Post.find(@reply.post_id).message%>
+  </div>
   <div class="field">
     <%= f.label :reply %><br />
     <%= f.text_area :reply %>

@@ -4,6 +4,10 @@ BCA::Application.routes.draw do
 
   get "log_out" => "sessions#destroy", :as=>"log_out"
 
+  match "posts/update" => "posts#update_votes"
+
+  match "reply/update" => "replies#update_votes"
+
   resources :sessions
 
   resources :replies

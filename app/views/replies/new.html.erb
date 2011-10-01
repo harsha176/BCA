@@ -1,4 +1,7 @@
-<h2>New reply</h2>
+<h3>Replies</h3>
+<% for rep in @replies %>
+    <%= rep.reply %>
+<% end %>
 
 <%= render 'form' %>
 

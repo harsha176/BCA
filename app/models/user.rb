@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  
-  has_many :posts
+
   has_one :session
+  has_and_belongs_to_many :posts
+  has_and_belongs_to_many :replies
   
   attr_accessor :clear_text_password;
 

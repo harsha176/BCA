@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Reply</th>
+    <th>Post title</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,7 +12,8 @@
 <% @replies.each do |reply| %>
   <tr>
     <td><%= reply.reply %></td>
-    <td><%= link_to 'Show', reply %></td>
+    <td><%= Post.find(reply.post_id).title%></td>
+    <td><%= link_to "Vote(#{@votes[reply.id]})", :method => :post, :controller => :replies, :action => :update_votes, :reply_id => reply.id %></td>
     <td><%= link_to 'Edit', edit_reply_path(reply) %></td>
     <td><%= link_to 'Destroy', reply, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

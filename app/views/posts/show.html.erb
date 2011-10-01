@@ -12,9 +12,10 @@
 
 <p>
   <b>User:</b>
-  <%= @post.user_id %>
+  <%= User.find(@post.user_id).username %>
 </p>
 
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Reply',  new_reply_path%>
+<%= link_to 'Edit', edit_post_path(@post) %>
+<%= link_to 'Posts', post_path %>
+<%= link_to 'Reply',  new_reply_path(:post_id=>@post.id, :post_title=>@post.title, :post_message=>@post.message)%>
