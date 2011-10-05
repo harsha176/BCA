@@ -7,6 +7,8 @@ gem 'rails', '3.1.1.rc1'
 
 gem 'sqlite3'
 
+gem 'test-unit'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,0 +1,16 @@
+
+<h1>Welcome Admin!</h1>
+
+
+<%= yield %>
+
+ <p>
+   <%= link_to "Manage users", users_path %>
+   <%= link_to "Manage posts", posts_path %>
+   <%= link_to "View post activity", :controller => :admin, :action=> :post_activity %>
+</p>
+
+<p>
+  <%= link_to "Logout", :log_out%>
+</p>
+

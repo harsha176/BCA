@@ -1,19 +1,27 @@
 <!DOCTYPE html>  
 <html>  
 <head>  
-  <title>BCA</title>
+  <title>Live Channel Application</title>
   <%= stylesheet_link_tag :all %>  
   <%= javascript_include_tag :defaults %>  
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag 'title', :media => 'screen' %>
 
 </head>  
-<body>  
+<body>
+<table width= "1350" border="2">
+<tr>
+<td colspan="2" rowspan="1" style="background-color:#db7093;">
+<h1 align ="center"> Live Channel Application</h1>
+</td>
+</tr>
+</table>
   <% flash.each do |name, msg| %>  
     <%= content_tag :div, msg, :id => "flash#{name}" %>
   <% end %>  
   
-<%= yield %>  
+<%= yield %>
+
   
 </body>  
 </html>

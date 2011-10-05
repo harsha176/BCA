@@ -4,8 +4,12 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @votes = Hash.new
+    @user = current_user
     ## create a votes variable and initialize it with vote count and display them index page
+
+
     for post in @posts
+      @isDeletable = (User.find(post.user_id).id == @user.id) || @user.admin_rights
       @votes[post.id] = PostsUsers.get_vote_count(post.id)
     end
 
@@ -43,6 +47,10 @@ class PostsController < ApplicationController
   def edit
     authorize
     @post = Post.find(params[:id])
+    @user = current_user
+    @post_user_id = @post.user_id
+      format.html { redirect_to posts_path }
+        format.json { head :ok }
   end
 
   # POST /posts
@@ -55,7 +63,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        flash[:notice] =  'Post was successfully created.'
+        format.html { redirect_to @post}
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -86,12 +95,13 @@ class PostsController < ApplicationController
   def destroy
     authorize
     @post = Post.find(params[:id])
-    @post.destroy
+    @user = current_user
 
-    respond_to do |format|
+    @post.destroy
+         respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :ok }
-    end
+      end
   end
 
   def update_votes
@@ -102,5 +112,13 @@ class PostsController < ApplicationController
 
     redirect_to :action => "index"
 
+  end
+
+  def search
+
+       respond_to do |format|
+      format.html
+      format.xml { render :xml => @post }
+    end
   end
 end

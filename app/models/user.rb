@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :posts
   has_and_belongs_to_many :replies
   
-  attr_accessor :clear_text_password;
+  attr_accessor :clear_text_password
 
   validates_presence_of :username
   validates_uniqueness_of :username

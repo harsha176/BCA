@@ -1,0 +1,21 @@
+<h1>Activity Report</h1>
+
+<table>
+  <tr>
+    <th colspan="10">User</th>
+    <th colspan="10">Post id</th>
+    <th colspan="10">Post</th>
+    <th colspan="3">Votes</th>
+  </tr>
+  <% @users.each do |user| %>
+  <% @posts = Post.find_all_by_user_id(user.id) %>
+  <% @posts.each do |post| %>
+  <tr>
+    <td colspan="10"><%= user.username %></td>
+    <td colspan="10"><%= post.id %></td>
+    <td colspan="10"><%= post.title %></td>
+    <td colspan="3"><%= "#{@votes[post.id]} votes" %></td>
+  </tr>
+   <% end %>
+      <% end %>
+</table>

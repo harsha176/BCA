@@ -1,38 +1,64 @@
 <%= stylesheet_link_tag 'posts', :media => 'screen' %>
-<h2 align="center">Listing posts</h2>
+<h2>Listing posts</h2>
 
 <table>
   <tr>
-      <th colspan="1">Title</th>
-    <th colspan="1">Message</th>
-    <th colspan="1">User</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="5">Title</th>
+    <th colspan="10">Message</th>
+    <th colspan="2">User</th>
+    <th colspan="2">Vote</th>
+    <th colspan="2">Reply</th>
+    <th colspan="2">Edit</th>
+    <th colspan="2">Delete</th>
   </tr>
 
-
-      </td>
-</tr>
 <% @posts.each do |post| %>
   <tr>
-    <td><%= post.title %></td>
-    <td><%= post.message %></td>
-    <td><%= User.find(post.user_id).username%></td>
-    <td><%= link_to "Vote(#{@votes[post.id]})", :method => :post, :controller => :posts, :action => :update_votes, :post_id => post.id %></td>
-    <td><%= link_to 'Reply', new_reply_path(:post_id=>post.id)%></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <td colspan ="5">
+      <%= post.title %>
+    </td>
+    <td colspan="10">
+      <%= post.message %>
+    </td>
+    <td colspan="2">
+      <%= User.find(post.user_id).username%>
+    </td>
 
-      </tr>
+    <td colspan="2">
+    <%=link_to "Vote(#{@votes[post.id]})", :method => :post, :controller => :posts, :action => :update_votes, :post_id => post.id %>
+    </td>
+   <td colspan="2">
+   <%= link_to 'Reply', new_reply_path(:post_id=>post.id)%>
+   </td>
+    <td colspan="2">
+      <%= link_to_if @isDeletable, 'Edit', edit_post_path(post) %>
+    </td>
+   <td colspan="2">
+   <%= link_to_if @isDeletable, 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+   <td colspan="5" style="background-color:#98F5FF;">
+   </td>
+    <td colspan="5" style="background-color:#98F5FF;">
+   </td>
    <td colspan="2" style="background-color:#98F5FF;">
-     </td>
+   </td>
+    <td colspan="2" style="background-color:#98F5FF;">
+   </td>
+    <td colspan="2" style="background-color:#98F5FF;">
+   </td>
+      <td colspan="2" style="background-color:#98F5FF;">
+   </td>
 <% end %>
 </table>
 
-<p>
-  <%= link_to "Logout", :log_out%>
-</p>
 <br />
 
 <%= link_to 'New Post', new_post_path %>
+
+<p>
+
+  <%= link_to "Logout", :log_out%>
+
+  <%= link_to 'Back', :back  %>
+
+</p>

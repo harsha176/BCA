@@ -1,12 +1,11 @@
-class UsersController < ApplicationController
+class AdminController < ApplicationController
   # GET /users
   # GET /users.json
-  skip_before_filter :authorize, :only => [:new, :create]
 
   def index
     @users = User.all
     for user in @users
-          @isAdmin = current_user.admin_rights
+          @isAdmin = user.admin_rights
           @isDeletable = (user.id == current_user.id) || current_user.admin_rights
     end
 
@@ -90,27 +89,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def grant_admin
-  @user = User.find(params[:id])
-    @user.admin_rights = 'true'
-    @user.save
-    flash[:notice] = "#{@user.username} has been granted admin privileges"
-  #format.html { redirect_to :controller=>:admin, :action=>index }
-    redirect_to :controller=>:admin, :action=>:index
-end
-
-def revoke_admin
-      @user = User.find(params[:id])
-    if @user.admin_rights
-      @user.admin_rights = nil
-    @user.save
-    flash[:notice] = "Admin rights have been revoked for #{@user.username}   "
-    else
-      flash[:notice] = " #{@user.username} is not an admin  "
+ def post_activity
+     @users = User.all
+     @posts = Post.all
+     @votes = Hash.new
+     for post in @posts
+            @votes[post.id] = PostsUsers.get_vote_count(post.id)
     end
-
- # format.html { redirect_to :controller=>:admin, :action=>:index }
-  redirect_to :controller=>:admin, :action=>:index
-end
+   respond_to do |format|
+      format.html # post_activity.html.erb
+      format.json { render json: @users }
+   end
+   end
 
 end

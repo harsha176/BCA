@@ -8,6 +8,16 @@ BCA::Application.routes.draw do
 
   match "reply/update" => "replies#update_votes"
 
+  match "posts/admin_index" => "posts#admin_index"
+
+  match "users/grant_admin" => "users#grant_admin"
+
+  match "users/revoke_admin" => "users#revoke_admin"
+
+  match "admin/post_activity" => "admin#post_activity"
+
+   resources :admin
+
   resources :sessions
 
   resources :replies
