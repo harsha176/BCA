@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <!--<%= notice %>-->
+</p>
 
 <p>
   <b>Username:</b>
@@ -11,5 +13,7 @@
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'login', new_session_path %>
+<%= link_to 'login', new_session_path %> |
+<%= link_to_if @isAdmin, 'Admin Control', :controller => :admin, :action => :index  %>
+
 

@@ -4,9 +4,22 @@ class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
-  fixtures :user
+  fixtures :users
   test "the truth" do
     assert true
+  end
+
+  test "Username cannot be empty"    do
+    user = User.new
+    assert !user.valid?
+  end
+
+  test "Password is required" do
+    user = User.new
+    user.username ='Sindu'
+    user.password =''
+    user.save
+
   end
 
 test "Username should be unique" do
@@ -18,20 +31,12 @@ test "Username should be unique" do
    assert_equal("Username is not available", user.errors.on(:username))
  end
 
-test "Password should be of minimum 6 characters" do
-  user = User.new
-   user.username = User(:Sindhra).username
-   user.clear_text_password = "abcde"
-  # assert
-   assert_equal("Password should be more than 6 characters", user.errors.on(:username))
-end
-
 
 test "Authenticate user"  do
   user = User.new
    user.username = "Sindu"
-   user.clear_text_password = "sindhoora"
+   user.password = "sindhoora"
    user.save
-   assert User.authenticate(user.username, user.encrypt_password)
+   assert User.authenticate(user.username, user.password)
  end
 end

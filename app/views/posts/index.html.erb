@@ -1,15 +1,15 @@
 <%= stylesheet_link_tag 'posts', :media => 'screen' %>
-<h2>Listing posts</h2>
-
+<h2 align ="center">Listing posts</h2>
+ <div align="center">
 <table>
   <tr>
-    <th colspan="5">Title</th>
-    <th colspan="10">Message</th>
-    <th colspan="2">User</th>
-    <th colspan="2">Vote</th>
-    <th colspan="2">Reply</th>
-    <th colspan="2">Edit</th>
-    <th colspan="2">Delete</th>
+    <th colspan="5" style="background-color:#b0e0e6;">Title</th>
+    <th colspan="10" style="background-color:#b0e0e6;">Message</th>
+    <th colspan="2" style="background-color:#b0e0e6;">User</th>
+    <th colspan="2" style="background-color:#b0e0e6;">Vote</th>
+    <th colspan="2" style="background-color:#b0e0e6;">Reply</th>
+    <th colspan="2" style="background-color:#b0e0e6;">Edit</th>
+    <th colspan="2" style="background-color:#b0e0e6;">Delete</th>
   </tr>
 
 <% @posts.each do |post| %>
@@ -36,17 +36,19 @@
    <td colspan="2">
    <%= link_to_if @isDeletable, 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
-   <td colspan="5" style="background-color:#98F5FF;">
+   <td colspan="5" style="background-color:#b0e0e6;">
    </td>
-    <td colspan="5" style="background-color:#98F5FF;">
+    <td  colspan="10" style="background-color:#b0e0e6;">
    </td>
-   <td colspan="2" style="background-color:#98F5FF;">
+   <td  colspan="2" style="background-color:#b0e0e6;">
    </td>
-    <td colspan="2" style="background-color:#98F5FF;">
+    <td colspan="2" style="background-color:#b0e0e6;">
    </td>
-    <td colspan="2" style="background-color:#98F5FF;">
+    <td  colspan="2" style="background-color:#b0e0e6;">
    </td>
-      <td colspan="2" style="background-color:#98F5FF;">
+      <td  colspan="2" style="background-color:#b0e0e6;">
+   </td>
+      <td  colspan="2" style="background-color:#b0e0e6;">
    </td>
 <% end %>
 </table>
@@ -57,8 +59,11 @@
 
 <p>
 
+
+  <%= link_to_if @isDeletable, 'Admin Control', :controller=>:admin, :action=>:index  %>  |
+  <%= link_to 'Back', :back%> |
   <%= link_to "Logout", :log_out%>
 
-  <%= link_to 'Back', :back  %>
 
 </p>
+</div>

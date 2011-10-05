@@ -1,14 +1,14 @@
-<h2>Listing users</h2>
-
+<h2 align="center">Listing users</h2>
+<div align="center">
 <table>
   <tr>
-    <th colspan="10">Username</th>
-    <th colspan="15">Email</th>
-    <th colspan="5">Show</th>
-    <th colspan="5">Edit</th>
-    <th colspan="5">Destroy</th>
-    <th colspan="5">Grant Admin</th>
-    <th colspan="5">Revoke Admin</th>
+    <th colspan="10" style="background-color:#b0e0e6;">Username</th>
+    <th colspan="15" style="background-color:#b0e0e6;">Email</th>
+    <th colspan="5" style="background-color:#b0e0e6;">Show</th>
+    <th colspan="5" style="background-color:#b0e0e6;">Edit</th>
+    <th colspan="5" style="background-color:#b0e0e6;">Destroy</th>
+    <th colspan="5" style="background-color:#b0e0e6;">Grant Admin</th>
+    <th colspan="5" style="background-color:#b0e0e6;">Revoke Admin</th>
   </tr>
 
 <% @users.each do |user| %>
@@ -21,11 +21,22 @@
     <td colspan="5"><%= link_to_if @isAdmin, 'Grant Admin', :action => :grant_admin, :id=> user.id %></td>
     <td colspan="5"><%= link_to_if @isAdmin, 'Revoke Admin', :action => :revoke_admin, :id=> user.id%></td>
   </tr>
+      <tr>
+    <td colspan="10" style="background-color:#b0e0e6;"></td>
+    <td colspan="15" style="background-color:#b0e0e6;"></td>
+    <td colspan="5" style="background-color:#b0e0e6;"></td>
+    <td colspan="5" style="background-color:#b0e0e6;"></td>
+    <td colspan="5" style="background-color:#b0e0e6;"></td>
+    <td colspan="5" style="background-color:#b0e0e6;"></td>
+    <td colspan="5" style="background-color:#b0e0e6;"></td>
+      </tr>
 <% end %>
 </table>
+</div>
 
 <br />
-
-<%= link_to 'New User', new_user_path %>
+<p align="center">
+<%= link_to 'New User', new_admin_path %>
 
 <%= link_to 'Back', :back %>
+</p>

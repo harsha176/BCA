@@ -5,9 +5,11 @@
 <%= yield %>
 
  <p>
+   <b>
    <%= link_to "Manage users", users_path %>
    <%= link_to "Manage posts", posts_path %>
    <%= link_to "View post activity", :controller => :admin, :action=> :post_activity %>
+  </b>
 </p>
 
 <p>

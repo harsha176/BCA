@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   # GET /users.json
 
   def index
+    authorize
     @users = User.all
     for user in @users
           @isAdmin = user.admin_rights
@@ -81,8 +82,12 @@ class AdminController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
+    @posts = Post.find_all_by_user_id(user.id)
+    for post in @posts do
+      post.destroy
+    end
     @user.destroy
-
+    flash[:notice] = "User successfully deleted"
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :ok }
@@ -90,6 +95,7 @@ class AdminController < ApplicationController
   end
 
  def post_activity
+   authorize
      @users = User.all
      @posts = Post.all
      @votes = Hash.new

@@ -7,9 +7,6 @@ gem 'rails', '3.1.1.rc1'
 
 gem 'sqlite3'
 
-gem 'test-unit'
-
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -34,5 +31,8 @@ end
 
 group :test do
   # Pretty printed test output
-  gem 'turn', :require => false
+  gem 'memory_test_fix'
+  gem 'test-unit'
+    gem 'turn', :require => false
+   gem 'capybara'
 end

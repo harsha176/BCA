@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  setup do
-    @post = posts(:one)
-  end
+  fixtures "posts"
+  fixtures "votes"
 
   test "should get index" do
     get :index
@@ -12,8 +11,13 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
+    session[:user_id] = 1
     get :new
     assert_response :success
+
+    session[:user_id] = nil
+    get :new
+    assert_redirected_to(:controller=>:users, :action=>:login)
   end
 
   test "should create post" do
@@ -36,7 +40,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should update post" do
     put :update, id: @post.to_param, post: @post.attributes
-    assert_redirected_to post_path(assigns(:post))
+    assert_redirected_to (:controller => :posts, :action=> :index)
   end
 
   test "should destroy post" do
@@ -44,6 +48,6 @@ class PostsControllerTest < ActionController::TestCase
       delete :destroy, id: @post.to_param
     end
 
-    assert_redirected_to posts_path
+    assert_redirected_to (:controller => :posts, :action=> :index)
   end
 end
