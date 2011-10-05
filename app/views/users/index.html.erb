@@ -36,7 +36,7 @@
 
 <br />
 <p align="center">
-<%= link_to 'New User', new_admin_path %>
+<%= link_to_if @isAdmin, 'New User', new_admin_path %>
 
 <%= link_to 'Back', :back %>
 </p>

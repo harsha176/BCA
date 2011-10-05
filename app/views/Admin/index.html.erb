@@ -1,3 +1,4 @@
+<% if @isAdmin %>
 
 <h1>Welcome Admin!</h1>
 
@@ -16,3 +17,8 @@
   <%= link_to "Logout", :log_out%>
 </p>
 
+<% else %>
+
+ <h2> You are not an admin!</h2>
+
+<%end%>
