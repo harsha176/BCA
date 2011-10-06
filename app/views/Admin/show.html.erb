@@ -1,0 +1,12 @@
+<p id="notice">
+</p>
+
+<p>
+  <b>Username:</b>
+  <%= @user.username %>
+
+  <b>E-mail:</b>
+  <%= @user.e_mail %>
+</p>
+
+<%= link_to "Main Page", :controller=>:admin, :action=> :index %>
