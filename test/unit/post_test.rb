@@ -15,10 +15,9 @@ class PostTest < ActiveSupport::TestCase
    assert !post.valid?
  end
 
- test "A post belongs to only one user" do
-   post = Post.new(:id => posts(:post).id,
-                   :message => "To test if the post is unique for a user",
-                   :user_id => posts(:post).User.id)
-   assert post.save
- end
+  test "Every post must have a title" do
+  post = Post.new
+  assert !post.valid?
+end
+
 end

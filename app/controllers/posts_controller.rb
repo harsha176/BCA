@@ -2,25 +2,19 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    #@posts = Post.paginate(:page=>params[:page],:per_page=>10)
-    @posts = Post.all()
+    @posts = Post.all
     @votes = Hash.new
+    @isDeletable = Array.new
+     @isAdmin = current_user.admin_rights
     @user = current_user
-    @post_metric_map= Hash.new
-
     ## create a votes variable and initialize it with vote count and display them index page
 
 
     for post in @posts
-       @alpha=0.6
-       @isDeletable = (User.find(post.user_id).id == @user.id) || @user.admin_rights
-       @votes[post.id] = PostsUsers.get_vote_count(post.id)
-       metric = (1-@alpha)*post.vote_count + @alpha*(post.created_at.to_time.to_i() - Time.now().to_i)/600
-       @post_metric_map[post.id] = metric
+      @isDeletable[post.id] = (post.user_id == @user.id) || @user.admin_rights
+      @votes[post.id] = PostsUsers.get_vote_count(post.id)
     end
 
-    @posts = Hash.new
-    @post_metric_map.sort_by {|id, metric| metric}
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -115,9 +109,6 @@ class PostsController < ApplicationController
   def update_votes
     @user = current_user
     @post_id = params[:post_id]
-    post=Post.find(@post_id)
-    post.vote_count=post.vote_count+1
-    post.save
 
     msg = PostsUsers.vote(@user.id, @post_id)
 

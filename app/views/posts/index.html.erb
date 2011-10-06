@@ -1,9 +1,7 @@
 <%= stylesheet_link_tag 'posts', :media => 'screen' %>
-
-
-
-<h2 align="center">Listing posts</h2>
-  <table>
+<h2 align ="center">Listing posts</h2>
+ <div align="center">
+<table>
   <tr>
     <th colspan="5" style="background-color:#b0e0e6;">Title</th>
     <th colspan="10" style="background-color:#b0e0e6;">Message</th>
@@ -14,12 +12,7 @@
     <th colspan="2" style="background-color:#b0e0e6;">Delete</th>
   </tr>
 
-
-      </td>
-</tr>
-
-<% @post_metric_map.keys.each do |post_metric| %>
-   <% post = Post.find(post_metric)%>
+<% @posts.each do |post| %>
   <tr>
     <td colspan ="5">
       <%= post.title %>
@@ -38,10 +31,10 @@
    <%= link_to 'Reply', new_reply_path(:post_id=>post.id)%>
    </td>
     <td colspan="2">
-      <%= link_to_if @isDeletable, 'Edit', edit_post_path(post) %>
+      <%= link_to_if @isDeletable[post.id], 'Edit', edit_post_path(post) %>
     </td>
    <td colspan="2">
-   <%= link_to_if @isDeletable, 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+   <%= link_to_if @isDeletable[post.id], 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
    <td colspan="5" style="background-color:#b0e0e6;">
    </td>
@@ -57,7 +50,20 @@
    </td>
       <td  colspan="2" style="background-color:#b0e0e6;">
    </td>
-
 <% end %>
-
 </table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>
+
+<p>
+
+
+  <%= link_to_if  @isAdmin, 'Admin Control', :controller=>:admin, :action=>:index  %>  |
+  <%= link_to 'Back', :back%> |
+  <%= link_to "Logout", :log_out%>
+
+
+</p>
+</div>

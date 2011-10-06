@@ -1,13 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: This is test post1
-  message: To test if the message can be empty or not
+  title: "This is test post1"
+  message: "To test when both message and title are present"
   user_id: 1
   id: 1
 
 two:
-  title: This is test post 2
+  title: "This is test post 2 "
   message:
   user_id: 1
   id: 2
+
+three:
+  title:
+  message: "This is to test if title can be empty"
+  user_id: 3
+  id: 3

@@ -2,12 +2,10 @@
 
 Sindhra:
   username: Sindhra
-  password:  <%= User.encrypt_password('abcde') %>
-  e-mail:  s@gmail.com
-  admin-rights: true
+  password:  <%= User.encrypt_password('abcdef') %>
+  e_mail:  s@gmail.com
 
 Sindu:
   username: Sindu
   password:  <%= User.encrypt_password('sindhoora') %>
-  e-mail: sv@gmail.com
-  admin-rights: nil
+  e_mail: sv@gmail.com
