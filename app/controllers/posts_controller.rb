@@ -2,9 +2,10 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    #@posts = Post.paginate(:page=>params[:page],:per_page=>10)
-    @posts = Post.all()
+    @posts = Post.all
     @votes = Hash.new
+    @isDeletable = Array.new
+     @isAdmin = current_user.admin_rights
     @user = current_user
     @post_metric_map= Array.new
 
@@ -12,6 +13,7 @@ class PostsController < ApplicationController
 
 
     for post in @posts
+    @isDeletable[post.id] = (post.user_id == @user.id) || @user.admin_rights
     #here we write our metric by which the posts are sorted.
        @alpha=0.5     # this (0<alpha<1) value determines the importance we give to vote count and created time
                       # e.g. To give high importance to vote count, keep the alpha value low.

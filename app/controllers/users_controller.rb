@@ -5,9 +5,10 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @isDeletable = Array.new
     for user in @users
           @isAdmin = current_user.admin_rights
-          @isDeletable = (user.id == current_user.id) || current_user.admin_rights
+          @isDeletable[user.id] = (user.id == current_user.id) || current_user.admin_rights
     end
 
       respond_to do |format|

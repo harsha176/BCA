@@ -7,5 +7,5 @@ one:
 
 two:
   user_id: 1
-  reply_id: 1
+  reply_id: 2
   has_voted: false

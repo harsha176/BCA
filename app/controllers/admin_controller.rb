@@ -5,9 +5,10 @@ class AdminController < ApplicationController
   def index
     authorize
     @users = User.all
+    #Check if the user logged in is an admin or not
     for user in @users
           @isAdmin = user.admin_rights
-          @isDeletable = (user.id == current_user.id) || current_user.admin_rights
+          @isDeletable = ((user.id) == current_user.id) || current_user.admin_rights
     end
        respond_to do |format|
       format.html # index.html.erb
@@ -95,6 +96,7 @@ class AdminController < ApplicationController
   end
 
  def post_activity
+   #to show the posts and the number of votes per post for each user.
    authorize
      @users = User.all
      @posts = Post.all

@@ -19,17 +19,9 @@ class UserTest < ActiveSupport::TestCase
     user.username ='Sindu'
     user.password =''
     user.save
-
+    assert !user.valid?
   end
 
-test "Username should be unique" do
-  user = User.new
-   user.username = User(:Sindhoora).username
-   user.password = "check_password"
-   user.id = (Users(:Sindhoora).id + 1)
-   assert !user.valid?
-   assert_equal("Username is not available", user.errors.on(:username))
- end
 
 
 test "Authenticate user"  do
