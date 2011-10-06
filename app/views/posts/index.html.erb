@@ -1,6 +1,8 @@
 <%= stylesheet_link_tag 'posts', :media => 'screen' %>
+<%= @notice %>
 <h2 align ="center">Listing posts</h2>
  <div align="center">
+
 <table>
   <tr>
     <th colspan="5" style="background-color:#b0e0e6;">Title</th>
@@ -38,7 +40,7 @@
       <%= link_to_if @isDeletable[post.id], 'Edit', edit_post_path(post) %>
     </td>
    <td colspan="2">
-   <%= link_to_if @isDeletable[post.id], 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+   <%= link_to_if @isDeletable[post.id], 'Destroy', :id=>post.id,:action=>:destroy, :controller => :posts %></td>
   </tr>
    <td colspan="5" style="background-color:#b0e0e6;">
    </td>
@@ -54,6 +56,7 @@
    </td>
       <td  colspan="2" style="background-color:#b0e0e6;">
    </td>
+
 <% end %>
 </table>
 

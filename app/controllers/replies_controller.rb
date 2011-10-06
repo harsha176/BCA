@@ -4,6 +4,7 @@ class RepliesController < ApplicationController
   def index
     @replies = Reply.all
     @votes = Hash.new
+    @notice = params[:notice]
 
     for reply in @replies
       @votes[reply.id] = RepliesUsers.get_vote_count(reply.id)
@@ -47,6 +48,7 @@ class RepliesController < ApplicationController
   # POST /replies
   # POST /replies.json
   def create
+    authorize
     @reply = Reply.new(params[:reply])
     @reply.user_id = current_user.id
 
@@ -95,7 +97,7 @@ class RepliesController < ApplicationController
 
     msg = RepliesUsers.vote(@user.id, @reply_id)
 
-    redirect_to :action => "index"
+    redirect_to :action => "index", :notice => msg
 
   end
 end

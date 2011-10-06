@@ -1,14 +1,18 @@
 class PostsController < ApplicationController
+
   # GET /posts
   # GET /posts.json
+  skip_before_filter :authorize, :only => [:show, :index, :search]
+
+
   def index
     @posts = Post.all
     @votes = Hash.new
     @isDeletable = Array.new
-     @isAdmin = current_user.admin_rights
+    @isAdmin = current_user.admin_rights
+    @notice = params[:notice]
     @user = current_user
-    @post_metric_map= Array.new
-
+    @post_metric_map= Hash.new
     ## create a votes variable and initialize it with vote count and display them index page
 
 
@@ -19,7 +23,6 @@ class PostsController < ApplicationController
                       # e.g. To give high importance to vote count, keep the alpha value low.
        @beta=86400    # this value is used to scale the 'time since creation' . We consider here that
                       # the messages that has been created in one day to be in the same level.
-       @isDeletable = (User.find(post.user_id).id == @user.id) || @user.admin_rights
        @votes[post.id] = PostsUsers.get_vote_count(post.id)
        metric = (1-@alpha)*post.vote_count + @alpha*(post.created_at.to_time.to_i() - Time.now().to_i)/@beta
        post.metric=metric
@@ -123,12 +126,12 @@ class PostsController < ApplicationController
     @user = current_user
     @post_id = params[:post_id]
     post=Post.find(@post_id)
-    post.vote_count=post.vote_count+1
+
     post.save
 
     msg = PostsUsers.vote(@user.id, @post_id)
 
-    redirect_to :action => "index"
+    redirect_to :action => "index", :notice => msg
 
   end
 

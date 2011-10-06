@@ -8,6 +8,14 @@ BCA::Application.routes.draw do
 
   match "reply/update" => "replies#update_votes"
 
+  match "post/search" => "posts#search"
+
+  match "user/search" => "users#search"
+
+  match "posts/destroy" => "posts#destroy"
+
+  match "replies/destroy" => "replies#destroy"
+  
   match "posts/admin_index" => "posts#admin_index"
 
   match "users/grant_admin" => "users#grant_admin"
@@ -16,7 +24,7 @@ BCA::Application.routes.draw do
 
   match "admin/post_activity" => "admin#post_activity"
 
-   resources :admin
+  resources :admin
 
   resources :sessions
 

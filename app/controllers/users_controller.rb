@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  skip_before_filter :authorize, :only => [:new, :create, :grant_admin,:revoke_admin]
+  skip_before_filter :authorize, :only => [:new, :create, :show, :index, :search]
 
   def index
     @users = User.all
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
           @isDeletable[user.id] = (user.id == current_user.id) || current_user.admin_rights
     end
 
-      respond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
     end
@@ -82,37 +82,26 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-   @user = User.find(params[:id])
-   @posts = Post.all
-      user.post.each do|p|
-        p.destroy
-      end
-    user.destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
     flash[:notice] = "User has been successfully deleted"
-     respond_to do |format|
+    respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :ok }
     end
   end
 
-  def grant_admin
-    #Grant admin privileges to a user
-    # Get the user
-    @user = User.find(params[:id])
-    #Check if the user is already an admin, If no, grant admin rights.
-    if !@user.admin_rights
-    @user.admin_rights= 'true'
-   if @user.save(:validate => false)
-    flash[:notice] = "#{@user.username} has been granted admin privileges"
-  else
-    flash[:notice] = "Error when granting admin privileges"
-  end
-    else
-      flash[:notice] = "#{@user.username} is already an admin"
+    def search
+
+    @user_opt = params[:q]
+    @users = User.where("username like ?", @user_opt +"%")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @users }
     end
-  #format.html { redirect_to :controller=>:admin, :action=>index }
-    redirect_to :controller=>:admin, :action=>:index
-end
+  end
 
 def revoke_admin
       @user = User.find(params[:id])
@@ -139,4 +128,22 @@ def revoke_admin
   redirect_to :controller=>:admin, :action=>:index
   end
 
+def grant_admin
+    #Grant admin privileges to a user
+    # Get the user
+    @user = User.find(params[:id])
+    #Check if the user is already an admin, If no, grant admin rights.
+    if !@user.admin_rights
+    @user.admin_rights= 'true'
+   if @user.save(:validate => false)
+    flash[:notice] = "#{@user.username} has been granted admin privileges"
+  else
+    flash[:notice] = "Error when granting admin privileges"
+  end
+    else
+      flash[:notice] = "#{@user.username} is already an admin"
+    end
+  #format.html { redirect_to :controller=>:admin, :action=>index }
+    redirect_to :controller=>:admin, :action=>:index
+end
 end
