@@ -8,3 +8,7 @@
                         }
 
 
+                        textarea{
+                              max-height: 110px;
+                              min-width: 800px;
+                        }
