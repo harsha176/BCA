@@ -78,6 +78,7 @@ class SessionsController < ApplicationController
     # DELETE /sessions/1.json
     def destroy
       session[:user_id] = nil
+      @curr_user = nil
       redirect_to :log_in, :notice => "Logged out"
     end
     end

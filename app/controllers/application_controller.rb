@@ -2,13 +2,17 @@ class ApplicationController < ActionController::Base
     protect_from_forgery
     before_filter :authorize
     private
+
     def current_user
-      User.find(session[:user_id])
+      @curr_user=User.find(session[:user_id])
     rescue ActiveRecord::RecordNotFound
       user = User.create
       session[:user_id] = user.id
+      @curr_user = user
       user
     end
+
+
 
     protected
     def authorize

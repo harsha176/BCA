@@ -7,6 +7,9 @@ gem 'rails', '3.1.1.rc1'
 
 gem 'sqlite3'
 
+gem 'test-unit'
+ gem 'will_paginate', '3.0.pre2'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

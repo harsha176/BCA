@@ -1,8 +1,14 @@
+<%= stylesheet_link_tag 'cssreplies', :media => 'screen' %>
+
 <h3>Replies</h3>
+<table>
 <% for rep in @replies %>
-    <%= rep.reply %>
+
+     <tr><td>
+    <%= rep.reply  %></td>
+       </tr>
+
 <% end %>
-
+</table>
 <%= render 'form' %>
-
 <%= link_to 'Back', replies_path %>

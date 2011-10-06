@@ -2,10 +2,10 @@
 
 one:
   user_id: 1
-  reply_id: 1
-  has_voted?: false
+  post_id: 1
+  has_voted: false
 
 two:
   user_id: 1
-  reply_id: 1
-  has_voted?: false
+  post_id: 1
+  has_voted: false

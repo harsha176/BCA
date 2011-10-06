@@ -8,7 +8,7 @@ class PostsUsers < ActiveRecord::Base
 
   def PostsUsers.vote(user_id, post_id)
     if Post.find(post_id).user_id == user_id
-      "Its the user own post and therefore cannot vote"
+      "Its the users own post and therefore cannot vote"
     elsif PostsUsers.find_by_user_id_and_post_id(user_id, post_id)
         "User has already voted"
     else
@@ -16,7 +16,6 @@ class PostsUsers < ActiveRecord::Base
       a_post.user_id = user_id
       a_post.post_id = post_id
       a_post.has_voted= "true"
-
       a_post.save
     end
   end

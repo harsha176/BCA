@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   has_one :session
   has_and_belongs_to_many :posts
   has_and_belongs_to_many :replies
@@ -13,11 +13,13 @@ class User < ActiveRecord::Base
 
   validates_presence_of :e_mail
   validates_uniqueness_of :e_mail
+  validates :e_mail, :presence => true,
+                    :format   => { :with => email_regex }
 
   def User.authenticate(name, password)
     if user = find_by_username(name)
       if user.password == encrypt_password(password)
-        user
+       user
       end
     end
   end

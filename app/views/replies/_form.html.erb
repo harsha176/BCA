@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'replies_form', :media => 'screen' %>
 <%= form_for(@reply) do |f| %>
   <% if @reply.errors.any? %>
     <div id="error_explanation">
@@ -11,10 +12,10 @@
     </div>
   <% end %>
     <div class="field">
-    <%= f.label :Post %><br />
+<h3><%= f.label :Post %><br /></h3>
       <%= f.hidden_field :post_id, :value=> @reply.post_id%>
-      <%= f.label Post.find(@reply.post_id).title%>
-      <%= f.label Post.find(@reply.post_id).message%>
+     <strong> Title:</strong> <%= f.label Post.find(@reply.post_id).title%><br />
+      <strong>Message:</strong> <%= f.label Post.find(@reply.post_id).message%><br />
   </div>
   <div class="field">
     <%= f.label :reply %><br />
