@@ -1,0 +1,10 @@
+                        table, td {
+                            border:1px solid black;
+                            background: #E3F6FC;
+                        }
+                       td {
+                           max-width: 700px;
+                           word-wrap: break-word;
+                        }
+
+

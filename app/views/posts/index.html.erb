@@ -18,8 +18,7 @@
       </td>
 </tr>
 
-<% @post_metric_map.keys.each do |post_metric| %>
-   <% post = Post.find(post_metric)%>
+<% @posts.each do |post| %>
   <tr>
     <td colspan ="5">
       <%= post.title %>

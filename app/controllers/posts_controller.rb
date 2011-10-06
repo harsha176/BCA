@@ -6,21 +6,26 @@ class PostsController < ApplicationController
     @posts = Post.all()
     @votes = Hash.new
     @user = current_user
-    @post_metric_map= Hash.new
+    @post_metric_map= Array.new
 
     ## create a votes variable and initialize it with vote count and display them index page
 
 
     for post in @posts
-       @alpha=0.6
+    #here we write our metric by which the posts are sorted.
+       @alpha=0.5     # this (0<alpha<1) value determines the importance we give to vote count and created time
+                      # e.g. To give high importance to vote count, keep the alpha value low.
+       @beta=86400    # this value is used to scale the 'time since creation' . We consider here that
+                      # the messages that has been created in one day to be in the same level.
        @isDeletable = (User.find(post.user_id).id == @user.id) || @user.admin_rights
        @votes[post.id] = PostsUsers.get_vote_count(post.id)
-       metric = (1-@alpha)*post.vote_count + @alpha*(post.created_at.to_time.to_i() - Time.now().to_i)/600
-       @post_metric_map[post.id] = metric
+       metric = (1-@alpha)*post.vote_count + @alpha*(post.created_at.to_time.to_i() - Time.now().to_i)/@beta
+       post.metric=metric
+      post.save
     end
 
-    @posts = Hash.new
-    @post_metric_map.sort_by {|id, metric| metric}
+    @posts = Post.find(:all, :order => 'metric' ).reverse
+   # @post_metric_map.sort_by {|id, metric| metric}
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
