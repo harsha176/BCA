@@ -21,8 +21,8 @@
     <td><%= User.find(post.user_id).username%></td>
     <td><%= link_to "Vote(#{@votes[post.id]})", :method => :post, :controller => :posts, :action => :update_votes, :post_id => post.id %></td>
     <td><%= link_to 'Reply', new_reply_path(:post_id=>post.id)%></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', :id=>post.id,:action=>:destroy, :controller => :posts %></td>
+    <td><%= link_to_if @isDeletable[post.id], 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to_if @isDeletable[post.id], 'Destroy', :id=>post.id,:action=>:destroy, :controller => :posts %></td>
 
       </tr>
    <td colspan="2" style="background-color:#98F5FF;">

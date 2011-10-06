@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.json
   skip_before_filter :authorize, :only => [:new, :create, :show, :index, :search]
 
+  # This method uses
   def index
     @users = User.all
     @isDeletable = Array.new

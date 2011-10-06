@@ -1,6 +1,8 @@
 class RepliesController < ApplicationController
   # GET /replies
   # GET /replies.json
+
+  # This action list all the replies along with its posts.
   def index
     @replies = Reply.all
     @votes = Hash.new
@@ -29,6 +31,7 @@ class RepliesController < ApplicationController
 
   # GET /replies/new
   # GET /replies/new.json
+  # lists all the replies for given post.
   def new
     @reply = Reply.new
     @reply.post_id = params[:post_id]

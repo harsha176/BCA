@@ -5,6 +5,8 @@ class PostsController < ApplicationController
   skip_before_filter :authorize, :only => [:show, :index, :search]
 
 
+
+  # This action is used display all the posts in order defined by a metric. This metric is dependent on vote_cont and creation date.
   def index
     @posts = Post.all
     @votes = Hash.new
@@ -67,8 +69,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = current_user
     @post_user_id = @post.user_id
-      format.html { redirect_to posts_path }
-        format.json { head :ok }
   end
 
   # POST /posts
@@ -111,7 +111,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    authorize
+    authorize            # before destroying any user it has to be authorized.
     @post = Post.find(params[:id])
     @user = current_user
 
@@ -122,6 +122,9 @@ class PostsController < ApplicationController
       end
   end
 
+  #
+  # Updates votes when ever a user casts votes.
+  #
   def update_votes
     @user = current_user
     @post_id = params[:post_id]
@@ -135,11 +138,44 @@ class PostsController < ApplicationController
 
   end
 
+  #
+  #
+  # This action searches for all the posts either posted by given user or by post title.
+  #
   def search
+     @user_opt = params[:user_opt]
+     @key = params[:q]
+     @votes = Hash.new
+     @msg = ""
+     @isDeletable = Array.new
+     @posts = Array.new
+     @user = current_user
 
-       respond_to do |format|
-      format.html
-      format.xml { render :xml => @post }
-    end
-  end
+     if @user_opt.to_i == 1
+       @posts = Post.where("title like ?", params[:q] +"%")
+       ## create a votes variable and initialize it with vote count and display them index page
+     else
+           @posts = Post.find_all_by_user_id(User.find_by_username(params[:q]).id)
+     end
+
+     for post in @posts
+             @votes[post.id] = PostsUsers.get_vote_count(post.id)
+     end
+
+     # Checking which of the posts user can delete
+     for post in @posts
+       @isDeletable[post.id] = (post.user_id == @user.id) || @user.admin_rights
+     end
+
+     if @posts.empty?
+         @msg = "No search results found. Try new search"
+     end
+     respond_to do |format|
+         format.html # show.html.erb
+         format.json { render json: @post }
+     end
+
+   end
+
+
 end
