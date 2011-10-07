@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.1.rc1'
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
+gem 'activerecord-jdbcpostgresql-adapter'
 
 gem 'test-unit'
- gem 'will_paginate', '3.0.pre2'
+gem 'will_paginate', '3.0.pre2'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,6 +23,11 @@ gem 'jquery-rails'
 group :development, :test do
   gem "rspec-rails", "~> 2.0"
   gem "webrat"
+end
+
+group :production do
+  # gems specifically for Heroku go here
+  gem "pg"
 end
 
 # To use ActiveModel has_secure_password
