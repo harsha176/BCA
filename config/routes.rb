@@ -15,6 +15,8 @@ BCA::Application.routes.draw do
   match "posts/destroy" => "posts#destroy"
 
   match "replies/destroy" => "replies#destroy"
+
+  match "users/destroy" => "users#destroy"
   
   match "posts/admin_index" => "posts#admin_index"
 

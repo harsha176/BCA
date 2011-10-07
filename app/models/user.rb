@@ -1,4 +1,3 @@
-
 #
 # This model is used to store user information. Every registered user has entry in Users table.
 # It performs hashing before storing the password and it provides methods to authenticate, encrypt and generate_salt methods.
@@ -6,14 +5,16 @@
 
 class User < ActiveRecord::Base
   # A user can have many posts and replies.
-  
+
   has_one :session
+  has_many :posts, :dependent=>:destroy
   has_and_belongs_to_many :posts
   has_and_belongs_to_many :replies
-  
+
+
   #Email validation regular expression 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  
+
   # Creating a virtual attribute fetching clear_text_password from the user.
   attr_accessor :clear_text_password;
 
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
   validates_presence_of :e_mail
   validates_uniqueness_of :e_mail
   validates :e_mail, :presence => true,
-                    :format   => { :with => email_regex }
+            :format => {:with => email_regex}
 
 
   # This method is used to authenticate a user while login.

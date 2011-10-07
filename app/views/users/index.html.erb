@@ -17,7 +17,7 @@
     <td colspan="15"><%= user.e_mail %></td>
     <td colspan="5"><%= link_to 'Show', user %></td>
     <td colspan="5"><%= link_to_if @isDeletable[user.id], 'Edit', edit_user_path(user) %></td>
-    <td colspan="5"><%=  link_to_if @isDeletable[user.id], 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+    <td colspan="5"><%= link_to_if @isDeletable[user.id], 'Destroy', :id=>user.id, :action=>:destroy, :controller => :users %></td>
     <td colspan="5"><%= link_to_if @isAdmin, 'Grant Admin', :action => :grant_admin, :id=> user.id %></td>
     <td colspan="5"><%= link_to_if @isAdmin, 'Revoke Admin', :action => :revoke_admin, :id=> user.id%></td>
   </tr>
