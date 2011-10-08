@@ -1,14 +1,10 @@
-<%= stylesheet_link_tag 'cssreplies', :media => 'screen' %>
-
-<h3>Replies</h3>
-<table>
-<% for rep in @replies %>
-
-     <tr><td>
-    <%= rep.reply  %></td>
-       </tr>
-
-<% end %>
+<table bgcolor="#FFF8DC" style="position: absolute; top:100px; right:10px; background-color: #FFF8DC">
+  <td align="right">
+    <p align="right">
+      <%= link_to 'Posts', :back %>
+      <%= link_to 'New Post', new_post_path %>
+      <%= link_to_if @curr_user, "Logout", :log_out %>
+    </p>
+  </td>
 </table>
 <%= render 'form' %>
-<%= link_to 'Back', replies_path %>

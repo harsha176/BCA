@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<table width= "1080" border="2">
+<table width= "100%" border="2">
 <tr>
 <td colspan="2" rowspan="1" style="background-color:#db7093;">
 <h1 align ="center"> BackChannel Application</h1>
@@ -17,13 +17,7 @@
   </tr>
 </table>
 
-  <td align="right">
-<p align="right">
-  <%= link_to 'Back', :back  %>
-  <%= link_to 'New Post', new_post_path %>
-  <%= link_to_if @curr_user, "Logout", :log_out%>
-</p>
-          </td>
+
   <% flash.each do |name, msg| %>  
     <%= content_tag :div, msg, :id => "flash#{name}" %>
   <% end %>  
