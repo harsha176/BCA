@@ -10,11 +10,10 @@ class AdminController < ApplicationController
           @isAdmin = user.admin_rights
           @isDeletable = ((user.id) == current_user.id) || current_user.admin_rights
     end
-       respond_to do |format|
+      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
       end
-
   end
 
   # GET /users/1
