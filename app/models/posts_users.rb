@@ -35,10 +35,10 @@ class PostsUsers < ActiveRecord::Base
 
       a_post.save
 
-      post=Post.find(@post_id)
+      post=Post.find(post_id)
       post.vote_count=post.vote_count+1
       post.save
-
+        "Successfully voted!"
     end
   end
 end
