@@ -28,7 +28,7 @@ BCA::Application.routes.draw do
 
   match "admin" => "admin#index"
 
-  resources :admin
+  resources :admins
 
   resources :sessions
 
