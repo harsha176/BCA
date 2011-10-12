@@ -13,6 +13,12 @@
 (D) Commands to start the app : 'rails server' to start the server.
                                 'rake test' to run the tests.
 
+    Administrator credentials :
+                        username: admin
+                        password: adminadmin
+    Note: By logging in with above credentials it will take us to admin home page.
+
+
 
 == Welcome to Rails
 
