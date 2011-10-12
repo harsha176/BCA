@@ -1,3 +1,5 @@
+ <%= javascript_include_tag :all %>
+ <%=@notice %>
 <h2>Listing replies</h2>
 
 <table>
@@ -15,7 +17,7 @@
     <td><%= Post.find(reply.post_id).title%></td>
     <td><%= link_to "Vote(#{@votes[reply.id]})", :method => :post, :controller => :replies, :action => :update_votes, :reply_id => reply.id %></td>
     <td><%= link_to 'Edit', edit_reply_path(reply) %></td>
-    <td><%= link_to 'Destroy', reply, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', :id=>reply.id, :action=>:destroy, :controller => :replies %></td>
   </tr>
 <% end %>
 </table>

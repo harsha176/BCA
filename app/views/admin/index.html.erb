@@ -1,11 +1,10 @@
-<% if @isAdmin %>
 
-<h1>Welcome Admin!</h1>
+<h1 align="center">Welcome Admin!</h1>
 
 
 <%= yield %>
 
- <p>
+ <p align ="center">
    <b>
    <%= link_to "Manage users", users_path %>
    <%= link_to "Manage posts", posts_path %>
@@ -13,12 +12,3 @@
   </b>
 </p>
 
-<p>
-  <%= link_to "Logout", :log_out%>
-</p>
-
-<% else %>
-
- <h2> You are not an admin!</h2>
-
-<%end%>

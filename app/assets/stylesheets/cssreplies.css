@@ -1,0 +1,14 @@
+                        table, td {
+                            border:1px solid black;
+                            background: #E3F6FC;
+                        }
+                       td {
+                           max-width: 700px;
+                           word-wrap: break-word;
+                        }
+
+
+                        textarea{
+                              max-height: 110px;
+                              min-width: 800px;
+                        }

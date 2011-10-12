@@ -1,16 +1,40 @@
 <%= stylesheet_link_tag 'posts', :media => 'screen' %>
-<h2 align ="center">Listing posts</h2>
+<%= @notice %>
+
  <div align="center">
+   <table bgcolor="#FFF8DC" style="position: absolute; top:100px; right:10px; background-color: #FFF8DC">
+      <td align="right">
+<p align="right">
+  <%= link_to 'Back', :back  %>
+  <%= link_to 'New Post', new_post_path %>
+  <%= link_to_if @curr_user, "Logout", :log_out%>
+  <%= form_tag({:controller=>:posts ,:action =>:search}, :method => "get") do %>
+      <%= label_tag(:q, "Search for:") %>
+      <%= text_field_tag(:q) %>
+      <%= select_tag(:user_opt, options_for_select( [['posts', 1], ['users', 2]])) %>
+      <%= submit_tag("Search") %>
+  <% end %>
+</p>
+          </td>
+   </table>
+  <br/>
+   <br/>
+   <br/>
+<h2 align ="center">Listing posts</h2>
 <table>
   <tr>
-    <th colspan="5" style="background-color:#b0e0e6;">Title</th>
-    <th colspan="10" style="background-color:#b0e0e6;">Message</th>
-    <th colspan="2" style="background-color:#b0e0e6;">User</th>
-    <th colspan="2" style="background-color:#b0e0e6;">Vote</th>
-    <th colspan="2" style="background-color:#b0e0e6;">Reply</th>
-    <th colspan="2" style="background-color:#b0e0e6;">Edit</th>
-    <th colspan="2" style="background-color:#b0e0e6;">Delete</th>
+    <th colspan="5" style="background-color:#b0e0e6;"><h2>Title</h2></th>
+    <th colspan="10" style="background-color:#b0e0e6;"><h2>Message</h2></th>
+    <th colspan="2" style="background-color:#b0e0e6;"><h2>User</h2></th>
+    <th colspan="2" style="background-color:#b0e0e6;"><h2>Vote</h2></th>
+    <th colspan="2" style="background-color:#b0e0e6;"><h2>Reply</h2></th>
+    <th colspan="2" style="background-color:#b0e0e6;"><h2>Edit</h2></th>
+    <th colspan="2" style="background-color:#b0e0e6;"><h2>Delete</h2></th>
   </tr>
+
+
+      </td>
+</tr>
 
 <% @posts.each do |post| %>
   <tr>
@@ -34,7 +58,7 @@
       <%= link_to_if @isDeletable[post.id], 'Edit', edit_post_path(post) %>
     </td>
    <td colspan="2">
-   <%= link_to_if @isDeletable[post.id], 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+   <%= link_to_if @isDeletable[post.id], 'Destroy', :id=>post.id,:action=>:destroy, :controller => :posts %></td>
   </tr>
    <td colspan="5" style="background-color:#b0e0e6;">
    </td>
@@ -50,20 +74,8 @@
    </td>
       <td  colspan="2" style="background-color:#b0e0e6;">
    </td>
+
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Post', new_post_path %>
-
-<p>
-
-
-  <%= link_to_if  @isAdmin, 'Admin Control', :controller=>:admin, :action=>:index  %>  |
-  <%= link_to 'Back', :back%> |
-  <%= link_to "Logout", :log_out%>
-
-
-</p>
 </div>

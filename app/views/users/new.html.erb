@@ -1,7 +1,7 @@
 <table>
 
 <tr valign="top">
-  <td style="background-color:#FFF8DC;width:670px;text-align:top;">
+  <td style="background-color:#FFF8DC;width:800px;text-align:top;">
 <h2 align="center">New User? Register</h2>
 
 <%= render 'form' %>
@@ -9,18 +9,21 @@
   <%= button_to "Login", new_session_path, :method => :get %>
 </div>
 
-<td style="background-color:#eeeeee;height:600px;width:670px;text-align:top;">
+<td style="background-color:#FFF8DC;height:600px;width:800px;text-align:top;">
   <div>
-  <div align = center>
-    <h2 align="center">Search</h2>
-  <%= form_tag posts_path do %>
-      <%= search_field_tag :search, params[:search] %>
-      <%= select_tag :option, "<option>post</option><option>user</option>".html_safe %>
-      <p class="button"><%= submit_tag "Search", :action=>"show" %></p>
-  <% end %>
-    </div>
-    </div>
-</td>
-</tr>
-  </table>
+
+
+        <div align=center>
+          <h2 align="center">Search</h2>
+          <%= form_tag({:controller=>:posts ,:action =>:search}, :method => "get") do %>
+              <%= label_tag(:q, "Search for:") %>
+              <%= text_field_tag(:q) %>
+              <%= select_tag(:user_opt, options_for_select( [['posts', 1], ['users', 2]])) %>
+              <%= submit_tag("Search") %>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
 

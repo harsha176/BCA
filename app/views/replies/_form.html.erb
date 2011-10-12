@@ -1,27 +1,54 @@
 <%= stylesheet_link_tag 'replies_form', :media => 'screen' %>
+<%= stylesheet_link_tag 'cssreplies', :media => 'screen' %>
 <%= form_for(@reply) do |f| %>
-  <% if @reply.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+    <% if @reply.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
 
-      <ul>
-      <% @reply.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @reply.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="field" style="width: 90%" >
+      <h3><%= f.label :Post %><br/></h3>
+      <%= f.hidden_field :post_id, :value=> @reply.post_id %>
+      <strong> Title:</strong> <%= f.label Post.find(@reply.post_id).title %>
+      <br/>
+      <strong>Message:</strong> <%= f.label Post.find(@reply.post_id).message %>
+      <br/>
     </div>
-  <% end %>
+    <table  bgcolor="white" style="background-color: #ffffff; border: #ffffff" width="90%">
+      <h3>Replies</h3>
+      <tr>
+        <td>
+          <h3>User</h3>
+        </td>
+        <td></td>
+        <td></td>
+        <td>
+          <h3>Reply</h3>
+        </td>
+      </tr>
+        <% for rep in @replies %>
+           <tr style="background-color: #ffffff;">
+             <td><%= User.find(rep.user_id).username %></td>
+             <td></td>
+             <td></td>
+        <td><%= rep.reply %></td>
+        </tr>
+           <% end %>
+    </table>
+
+    <br>
     <div class="field">
-<h3><%= f.label :Post %><br /></h3>
-      <%= f.hidden_field :post_id, :value=> @reply.post_id%>
-     <strong> Title:</strong> <%= f.label Post.find(@reply.post_id).title%><br />
-      <strong>Message:</strong> <%= f.label Post.find(@reply.post_id).message%><br />
-  </div>
-  <div class="field">
-    <%= f.label :reply %><br />
-    <%= f.text_area :reply %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <h3><%= f.label :reply %></h3>
+      <br/>
+      <%= f.text_area :reply %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

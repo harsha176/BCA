@@ -5,16 +5,15 @@ class AdminController < ApplicationController
   def index
     authorize
     @users = User.all
-    #Check if the user logged in is an admin or not
+    #Check if the user logged in is an admin or enable delete option only for his account if he is not administrator.
     for user in @users
           @isAdmin = user.admin_rights
           @isDeletable = ((user.id) == current_user.id) || current_user.admin_rights
     end
-       respond_to do |format|
+      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
       end
-
   end
 
   # GET /users/1

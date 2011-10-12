@@ -17,7 +17,7 @@ class PostsControllerTest < ActionController::TestCase
 
     session[:user_id] = nil
     get :new
-    assert_redirected_to(:controller=>:users, :action=>:login)
+    assert_redirected_to :controller=>:users, :action=>:login
   end
 
   test "should create post" do
@@ -39,8 +39,8 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "should update post" do
-    put :update, id: @post.to_param, post: @post.attributes
-    assert_redirected_to (:controller => :posts, :action=> :index)
+    put :update, {id => @post.to_param, title => @post.title, message => @post.message}
+    assert_redirected_to :controller => "posts", :action=> "index"
   end
 
   test "should destroy post" do
@@ -48,6 +48,6 @@ class PostsControllerTest < ActionController::TestCase
       delete :destroy, id: @post.to_param
     end
 
-    assert_redirected_to (:controller => :posts, :action=> :index)
+    assert_redirected_to :controller => :posts, :action=> :index
   end
 end
