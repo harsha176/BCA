@@ -26,9 +26,9 @@ BCA::Application.routes.draw do
 
   match "admin/post_activity" => "admin#post_activity"
 
-  match "admin" => "admin#index"
+  #match "admin" => "admin#index"
 
-  resources :admins
+  resources :admin
 
   resources :sessions
 
