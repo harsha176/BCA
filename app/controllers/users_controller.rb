@@ -84,6 +84,12 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
+    posts = Post.find_all_by_user_id(@user.id)
+
+    for post in posts
+      post.destroy
+    end
+
     @user.destroy
 
     flash[:notice] = "User has been successfully deleted"
