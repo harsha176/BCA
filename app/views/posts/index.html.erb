@@ -5,9 +5,9 @@
    <table bgcolor="#FFF8DC" style="position: absolute; top:100px; right:10px; background-color: #FFF8DC">
       <td align="right">
 <p align="right">
-  <%= link_to 'Back', :back  %>
-  <%= link_to 'New Post', new_post_path %>
-  <%= link_to_if @curr_user, "Logout", :log_out%>
+  <%= link_to 'Back', :back  %>   |
+  <%= link_to 'New Post', new_post_path %>  |
+  <%= link_to_if @curr_user, "Logout", :log_out%>   |
   <%= form_tag({:controller=>:posts ,:action =>:search}, :method => "get") do %>
       <%= label_tag(:q, "Search for:") %>
       <%= text_field_tag(:q) %>

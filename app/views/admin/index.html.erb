@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-=======
-<% if current_user.admin_rights %>
->>>>>>> Stashed changes
-
 <p align ="right">
-<%= link_to_if @curr_user, "Logout", :log_out%>
+<%= link_to "Logout", :log_out%>
 </p>
 
 <h1 align="center">Welcome Admin!</h1>
@@ -18,5 +13,3 @@
    <%= link_to "View post activity", :controller => :admin, :action=> :post_activity %>
   </b>
 </p>
-
-<% end %>
