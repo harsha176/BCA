@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream
+=======
+<% if current_user.admin_rights %>
+>>>>>>> Stashed changes
+
+<p align ="right">
+<%= link_to_if @curr_user, "Logout", :log_out%>
+</p>
 
 <h1 align="center">Welcome Admin!</h1>
-
 
 <%= yield %>
 
@@ -12,3 +19,4 @@
   </b>
 </p>
 
+<% end %>

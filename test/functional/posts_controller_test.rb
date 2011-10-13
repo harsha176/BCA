@@ -2,7 +2,6 @@ require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
   fixtures "posts"
-  fixtures "votes"
 
   test "should get index" do
     get :index
@@ -25,7 +24,7 @@ class PostsControllerTest < ActionController::TestCase
       post :create, post: @post.attributes
     end
 
-    assert_redirected_to post_path(assigns(:post))
+    assert_redirected_to posts_path(assigns(:post))
   end
 
   test "should show post" do

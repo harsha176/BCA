@@ -9,3 +9,8 @@ Sindu:
   username: Sindu
   password:  <%= User.encrypt_password('sindhoora') %>
   e_mail: sv@gmail.com
+
+Sindhoora:
+  username: Sindhoora
+  password:  <%= User.encrypt_password('abcdef') %>
+  e_mail: si@gmail.com

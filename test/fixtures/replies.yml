@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+reply1:
   reply: This is reply to test post1
   user_id: 2
   post_id: 1
 
-two:
+reply2:
   reply:
   user_id: 1
   post_id: 1

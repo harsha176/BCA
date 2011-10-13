@@ -7,6 +7,6 @@ class LoginTest < ActionDispatch::IntegrationTest
     fill_in("Username:", :with=>users(:Sindhra).username)
     fill_in("Password:", :with=>"abcdef")
     click_button "Login"
-    assert page.has_content?("Welcome #{users(:Sindhra).username}")
+    assert page.has_content?("Welcome #{users(:Sindhra).username}!")
   end
 end

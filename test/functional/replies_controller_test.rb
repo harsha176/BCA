@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class RepliesControllerTest < ActionController::TestCase
-  setup do
-    @reply = replies(:one)
-  end
+  fixtures "replies"
 
   test "should get index" do
     get :index

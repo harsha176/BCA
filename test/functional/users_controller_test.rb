@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  setup do
-    @user = User(:one)
-  end
+
+  fixtures "users"
 
   test "should get index" do
     get :index
@@ -21,7 +20,7 @@ class UsersControllerTest < ActionController::TestCase
       post :create, user: {:username=>"Sindhoora", :password=>"abcdef"}
     end
 
-    assert_redirected_to(:controller => :posts, :action=> :index)
+    assert_redirected_to :controller => :posts, :action=> :index
     
   end
 
@@ -37,7 +36,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should update user" do
     put :update, id: @user.to_param, user: {:username=>"Sindhoora", :password=>"abcdef"}
-    assert_redirected_to (:controller => :users, :action=> :index)
+    assert_redirected_to :controller => :users, :action=> :index
   end
 
   test "should destroy user" do
@@ -45,6 +44,6 @@ class UsersControllerTest < ActionController::TestCase
       delete :destroy, id: @user.to_param
     end
 
-    assert_redirected_to (:controller => :users, :action=> :index)
+    assert_redirected_to :controller => :users, :action=> :index
   end
 end

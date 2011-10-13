@@ -22,7 +22,15 @@ class UserTest < ActiveSupport::TestCase
     assert !user.valid?
   end
 
+  test "Username should be unique" do
+    user = User.new
+    user.username = users(:Sindhra).username
+    user.password = "abcdef"
+    user.id = (users(:Sindhra).id + 1)
+    assert !user.valid?
+    user.errors[:username]= ["Username is already taken"]
 
+ end
 
 test "Authenticate user"  do
   user = User.new
