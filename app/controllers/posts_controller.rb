@@ -155,7 +155,10 @@ class PostsController < ApplicationController
        @posts = Post.where("title like ? or message like ?", "%" + params[:q] +"%","%"+ params[:q] + "%")
        ## create a votes variable and initialize it with vote count and display them index page
      else
-           @posts = Post.find_all_by_user_id(User.find_by_username(params[:q]).id)
+       @users = User.where("username like ?", "%" + params[:q] +"%")
+       for user in @users
+           @posts = @posts + Post.find_all_by_user_id(user.id)
+         end
      end
 
      for post in @posts
